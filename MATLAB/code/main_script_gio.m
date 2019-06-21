@@ -4,23 +4,23 @@ clear
 close all
 
 %% carica bag file e riordina y con z
-bag = rosbag("2019-06-20-20-05-52.bag");
+bag = rosbag("../bag_file/2019-06-20-20-05-52.bag");
 
 % rosbag info '2019-06-20-20-05-52.bag';
 selec=select(bag,'Topic','markers_coo');
 msgStructs = readMessages(selec,'DataFormat','struct');
 msgStructs{1};
 
-cc=size(msgStructs{1,1}.Data,1);
-rr=length(msgStructs);
+num_mrks=size(msgStructs{1,1}.Data,1);
+num_msgs=length(msgStructs);
 
-msgArray=zeros(rr,cc);
+msgArray=zeros(num_msgs,num_mrks);
 
-for i=1:rr
+for i=1:num_msgs
     % mette i dati sulla riga i
     msgArray(i,:)=(msgStructs{i,1}.Data)';
     
-    for j=1:cc/3
+    for j=1:num_mrks/3
         % cambia y con z
         temp=msgArray(i,2+3*(j-1));
         msgArray(i,2+3*(j-1))=msgArray(i,3+3*(j-1));
@@ -28,12 +28,12 @@ for i=1:rr
     end
 end
 
-%%
-start = bag.StartTime
+%% get time
+start = bag.StartTime;
 
-timeStruct=select(bag,'Time',[start start+1],'Topic', 'markers_coo')
+timeStruct=select(bag,'Time',[start start+1],'Topic', 'markers_coo');
 % bag.MessageList(500:505,:)
-timeArray
+timeArray=table2array(timeStruct.MessageList(:,1));
 
 %% calcola matrice A
 
