@@ -3,37 +3,37 @@ clc
 clear
 close all
 
-%% carica bag file e riordina y con z
+%% load bag file 
 bag = rosbag("../bag_file/2019-06-20-20-05-52.bag");
+% bag = rosbag("../bag_file/test.bag");
 
 % rosbag info '2019-06-20-20-05-52.bag';
+
 selec=select(bag,'Topic','markers_coo');
 msgStructs = readMessages(selec,'DataFormat','struct');
 msgStructs{1};
 
-num_mrks=size(msgStructs{1,1}.Data,1);
+% setting the sizes
+num_el=size(msgStructs{1,1}.Data,1);
+num_mrks=num_el/3;
 num_msgs=length(msgStructs);
-
-msgArray=zeros(num_msgs,num_mrks);
-
+%% load data in the V matrix and flip y with z
+V=zeros(num_mrks,3,num_msgs);
 for i=1:num_msgs
-    % mette i dati sulla riga i
-    msgArray(i,:)=(msgStructs{i,1}.Data)';
-    
-    for j=1:num_mrks/3
-        % cambia y con z
-        temp=msgArray(i,2+3*(j-1));
-        msgArray(i,2+3*(j-1))=msgArray(i,3+3*(j-1));
-        msgArray(i,3+3*(j-1))=temp;
+    for j=1:num_mrks
+        V(j,:,i)=(msgStructs{i,1}.Data((j-1)*3+1:(j-1)*3+3,1))';
     end
 end
+temp=zeros(num_mrks,num_msgs);
+temp(:,:)=V(:,2,:);
+V(:,2,:)=V(:,3,:);
+V(:,3,:)=temp(:,:);
 
 %% get time
 start = bag.StartTime;
 
-timeStruct=select(bag,'Time',[start start+1],'Topic', 'markers_coo');
-% bag.MessageList(500:505,:)
-timeArray=table2array(timeStruct.MessageList(:,1));
+%time of every single msg
+timeArray=table2array(bag.MessageList(:,1));
 
 %% calcola matrice A
 
@@ -43,6 +43,11 @@ timeArray=table2array(timeStruct.MessageList(:,1));
 
 
 %% grafica
+
+% plot3([msgArray(1,1),msgArray(1,4)],[msgArray(1,2),msgArray(1,5)],[msgArray(1,6),msgArray(1,6)],'o-');
+plot3(V(:,1,1),V(:,2,1),V(:,3,1),'-o')
+
+
 
 
 
