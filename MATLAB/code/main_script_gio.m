@@ -37,6 +37,14 @@ timeArray=table2array(bag.MessageList(:,1));
 
 %% calcola matrice A
 
+Vmedio=meanV(V);
+
+% Vdes=V(:,:,150);
+Vdes(1,:)=V(2,:,150);
+Vdes(2,:)=V(1,:,150);
+
+A=findA(Vmedio,Vdes);
+
 
 %% riodina i markers
 
@@ -45,7 +53,7 @@ timeArray=table2array(bag.MessageList(:,1));
 %% grafica
 
 % plot3([msgArray(1,1),msgArray(1,4)],[msgArray(1,2),msgArray(1,5)],[msgArray(1,6),msgArray(1,6)],'o-');
-plot3(V(:,1,1),V(:,2,1),V(:,3,1),'-o')
+% plot3(V(:,1,1),V(:,2,1),V(:,3,1),'-o')
 
 
 
