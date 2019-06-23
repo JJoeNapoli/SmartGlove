@@ -5,7 +5,7 @@ close all
 
 %% load bag file 
 
-bag = rosbag("../bag_file/2019-06-20-20-05-52.bag");
+bag = rosbag("../../bag_file/2019-06-20-20-05-52.bag");
 % bag = rosbag("../bag_file/test.bag");
 
 % rosbag info '2019-06-20-20-05-52.bag';
