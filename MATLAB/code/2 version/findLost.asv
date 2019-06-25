@@ -1,7 +1,0 @@
-function ind = findLost(V1,V2)
-
-for j=1:num_mrks
-    dist=norm(V1(i,:)-V2(i,:));
-end
-
-end
