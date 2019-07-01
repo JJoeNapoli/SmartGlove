@@ -40,11 +40,24 @@ end
 V=clean_noises(V,RB);
 
 
-
 %% set orientation and remove non IMUs
 [x,y,z,ind]=set_orient(V,RB);
 [V,RB]=move_nonimu(V,RB,ind);
 
+
+%% set oTm
+% usando R=[x',y',z']
+%% set Vdes
+% da oTm andiamo fare l'inversa mTo
+% ogni marker lo salviamo relativamente
+% nell'ordine che preferiamo
+% questo è Vdes
+
+% set_Vdes( )
+
+%% findA
+% come nelle versioni precedenti,forse
+% A=findA(V)
 
 
 %% graph
