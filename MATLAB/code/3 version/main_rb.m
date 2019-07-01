@@ -9,8 +9,10 @@ bag = rosbag("../../bag_file/mano_rb.bag");
 % bag = rosbag("../../bag_file/nocche_rb.bag");
 % bag = rosbag("../../bag_file/test.bag");
 % bag = rosbag("../../bag_file/due_mrkrs.bag");
+% bag = rosbag("../../bag_file/2019-07-01-18-23-47.bag");
+% bag = rosbag("../../bag_file/2019-07-01-18-21-37.bag");
+% bag = rosbag("../../bag_file/2019-07-01-18-30-15.bag");
 
-% rosbag info '2019-06-20-20-05-52.bag';
 
 markers_coo=select(bag,'Topic','markers_coo');
 rigidbody_pose=select(bag,'Topic','Robot_1/pose');
@@ -20,6 +22,7 @@ msgs_mrks = readMessages(markers_coo,'DataFormat','struct');
 msgs_rb = readMessages(rigidbody_pose,'DataFormat','struct');
 % msgs_rb_gp = readMessages(rigidbody_g_pose,'DataFormat','struct');
 
+%% fill the structs
 % create the structs 
 V(1,1).field=0;
 RB(1,1).field=0;
@@ -33,20 +36,26 @@ for i=1:length(msgs_rb)
 RB(i,1).field=[msgs_rb{i,1}.Pose.Position.X,msgs_rb{i,1}.Pose.Position.Y,msgs_rb{i,1}.Pose.Position.Z];
 end
 
-% plot the original data
-figure(),hold on,plot3(V(1,1).field(:,1),V(1,1).field(:,2),V(1,1).field(:,3),'-or')
-plot3(RB(1,1).field(1,1),RB(1,1).field(1,2),RB(1,1).field(1,3),'-ob'),
-grid on
-
 % clean fromm bad data
 V=clean_noises(V,RB);
 
+
+
+%% set orientation and remove non IMUs
+[x,y,z,ind]=set_orient(V,RB);
+[V,RB]=move_nonimu(V,RB,ind);
+
+
+
+%% graph
 % plot the cleaned data
 figure(),hold on
 axis equal
 plot3(V(1,1).field(:,1),V(1,1).field(:,2),V(1,1).field(:,3),'or')
 plot3(RB(1,1).field(1,1),RB(1,1).field(1,2),RB(1,1).field(1,3),'ob'),
 grid on
+
+
 
 
 

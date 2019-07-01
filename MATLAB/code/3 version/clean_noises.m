@@ -2,8 +2,9 @@
 function V=clean_noises(V,RB)
 
 
-thresh=2;
+thresh=0.2;
 
+%numero messaggi
 num_msgs=min(length(V),length(RB));
 
 for i=1:num_msgs
