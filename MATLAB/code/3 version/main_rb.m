@@ -39,21 +39,37 @@ end
 % clean fromm bad data
 V=clean_noises(V,RB);
 
+%% da qui probabilmente metto un for 
+num_msgs=min(length(V),length(RB));
 
+for I=1:num_msgs
+    
 %% set orientation and remove non IMUs
-[x,y,z,ind]=set_orient(V,RB);
-[V,RB]=move_nonimu(V,RB,ind);
+%  ho fatto solo per il primo msg perché poi lo possiamo fare per tutti
+[oRm,ind]=set_orient(V(I,1).field,RB(I,1).field);
+[V,RB]=move_nonimu(V,RB,I,ind);
 
 
-%% set oTm
-% usando R=[x',y',z']
+%% set oTm and mTo
+
+oTm(:,:,I)=[   oRm,        RB(I,1).field';
+        zeros(1,3),     1];
+mTo(:,:,I)=[   oRm^-1,       -RB(I,1).field';
+        zeros(1,3),     1];
+    
+%% homogeneous coordiantes
+
+V(I,1).field=[V(I,1).field,ones(size(V(I,1).field,1),1)];
+    
+end
+
 %% set Vdes
-% da oTm andiamo fare l'inversa mTo
+% da oTm andiamo a fare l'inversa mTo
 % ogni marker lo salviamo relativamente
 % nell'ordine che preferiamo
 % questo è Vdes
 
-% set_Vdes( )
+mVdes=set_Vdes(V,mTo);
 
 %% findA
 % come nelle versioni precedenti,forse
