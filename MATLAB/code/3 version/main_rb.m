@@ -63,11 +63,11 @@ W = A * V(1,1).field;
 %% graph
 % plot the cleaned data
 
-figure(),hold on
-axis equal
-plot3(V(1,1).field(:,1),V(1,1).field(:,2),V(1,1).field(:,3),'or')
-plot3(RB(1,1).field(1,1),RB(1,1).field(1,2),RB(1,1).field(1,3),'ob'),
-grid on
+% figure(),hold on
+% axis equal
+% plot3(V(1,1).field(:,1),V(1,1).field(:,2),V(1,1).field(:,3),'or')
+% plot3(RB(1,1).field(1,1),RB(1,1).field(1,2),RB(1,1).field(1,3),'ob'),
+% grid on
 
 my_plot(V(1,1).field);
 my_plot(W);

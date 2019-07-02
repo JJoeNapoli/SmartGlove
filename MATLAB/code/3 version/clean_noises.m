@@ -1,7 +1,6 @@
 %% pulisce i messaggi dei mrks da quelli che non c'entrano
 function V=clean_noises(V,RB)
-
-
+% 20 cm 
 thresh=0.2;
 
 %numero messaggi
@@ -19,9 +18,4 @@ for i=1:num_msgs
     end
 end
 
-
-
-
-
 end
-
