@@ -1,4 +1,7 @@
-function temp=set_Vdes(V,mTo)
+%% funziona solo con "../../bag_file/mano_rb.bag"
+
+function mVdes=set_Vdes(V,mTo)
+% nota: V è campo e mTo è 2D
 
 % mV=mTo(:,:,1)*V(1,1).field;
 
@@ -14,10 +17,8 @@ temp=[  V(1,1).field(1,:)
     V(1,1).field(2,:)
     V(1,1).field(9,:)
     V(1,1).field(11,:)];
-mVdes=temp;
-for i=1:size(V(1,1).field,1)
-    mVdes(i,:)=(mTo(:,:,1)*(temp(i,:))')';
-end
 
+% set the right dimensions
+mVdes=my_transform(temp,mTo);
 end
 
