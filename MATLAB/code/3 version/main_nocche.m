@@ -33,6 +33,17 @@ oTm(:,:,I)=[   oRm,        RB(I,1).field';
 mTo(:,:,I)=[   oRm^-1,       -RB(I,1).field';
     zeros(1,3),     1];
 
+%%
+v=V(1,1).field(3,:)-V(1,1).field(4,:);
+V(1,1).field(5,:)=V(1,1).field(3,:)+v;
+V(1,1).field(6,:)=V(1,1).field(5,:)+v;
+
+nocche(1,:)=V(1,1).field(6,:);
+nocche(2,:)=V(1,1).field(5,:);
+nocche(3,:)=V(1,1).field(3,:);
+nocche(4,:)=V(1,1).field(4,:);
+
+nocche=[nocche, ones(4,1)];
 %% homogeneous coordiantes
 
 V(I,1).field=[V(I,1).field,ones(size(V(I,1).field,1),1)];
@@ -58,4 +69,4 @@ my_plot(mnocche);
 
 %% save nocche
 
-save("nocks","nocche")
+save("knucles","mnocche","nocche");

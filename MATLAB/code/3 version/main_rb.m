@@ -68,17 +68,40 @@ W = A * V(1,1).field;
 % plot3(V(1,1).field(:,1),V(1,1).field(:,2),V(1,1).field(:,3),'or')
 % plot3(RB(1,1).field(1,1),RB(1,1).field(1,2),RB(1,1).field(1,3),'ob'),
 % grid on
+% 
+% my_plot(V(1,1).field);
+% my_plot(W);
+% 
+% my_plot(mVdes)
 
-my_plot(V(1,1).field);
-my_plot(W);
 
-my_plot(mVdes)
+%% load knucles 
+load("knucles.mat")
+
+
+%% compute the following knucles
+% nocche=my_transform(mnocche,oTm(:,:,1))
+% my_plot([W;nocche]);
+
+% mV=my_transform(V(1,1).field,mTo(:,:,1));
+% my_plot([mV;mnocche]);
+
+my_skeleton(W,nocche)
+
+
+
+
+
+
 
 %%
-
+num_mrks=size(V(1,1).field,1);
 for i=1:num_msgs
     min_mrkrs(i)=(size(V(i,1).field,1));
-
+    if num_mrks ~= min_mrkrs(i)
+        i
+        min_mrks(i)
+    end
 end
 % min_mrkrs
 % min(min_mrkrs)
