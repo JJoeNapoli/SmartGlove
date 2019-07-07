@@ -33,9 +33,9 @@ for I=1:num_msgs
     
     oTm(:,:,I)=[   oRm,        RB(I,1).field';
         zeros(1,3),     1];
-    mTo(:,:,I)=[   oRm^-1,       -RB(I,1).field';
+    mTo(:,:,I)=[   oRm^-1,       (-oRm^-1)*RB(I,1).field';
         zeros(1,3),     1];
-    
+%     oTm(:,:,I)*mTo(:,:,I) %=eye(4)
     %% homogeneous coordiantes
     
     V(I,1).field=[V(I,1).field,ones(size(V(I,1).field,1),1)];
@@ -80,9 +80,9 @@ load("knucles.mat")
 
 
 %% compute the following knucles
-% nocche=my_transform(mnocche,oTm(:,:,1))
+nocche=my_transform(mnocche,oTm(:,:,1));
 % my_plot([W;nocche]);
-
+% 
 % mV=my_transform(V(1,1).field,mTo(:,:,1));
 % my_plot([mV;mnocche]);
 

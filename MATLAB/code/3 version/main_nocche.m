@@ -30,9 +30,8 @@ I=1;
 
 oTm(:,:,I)=[   oRm,        RB(I,1).field';
     zeros(1,3),     1];
-mTo(:,:,I)=[   oRm^-1,       -RB(I,1).field';
+mTo(:,:,I)=[   oRm^-1,       (-oRm^-1)*RB(I,1).field';
     zeros(1,3),     1];
-
 %%
 v=V(1,1).field(3,:)-V(1,1).field(4,:);
 V(1,1).field(5,:)=V(1,1).field(3,:)+v;
