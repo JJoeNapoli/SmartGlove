@@ -1,7 +1,7 @@
 function [oRm,ind]=set_orient(V,RB)
 
 for i=1:size(V,1)
-dist(i) = norm(RB - V(i,:));
+    dist(i) = norm(RB - V(i,:));
 end
 
 [~,ind(1)]=min(dist);

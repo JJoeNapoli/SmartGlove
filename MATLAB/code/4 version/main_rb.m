@@ -53,8 +53,6 @@ end
 mVdes=set_Vdes(V,mTo(:,:,1));
 
 %% findA
-% come nelle versioni precedenti,forse
-% sempre nel frame relativo relativo
 A=findA(V(1,1).field,mVdes,mTo(:,:,1));
 
 %%  check if some data are lost and sort them
@@ -73,9 +71,8 @@ for I = 2 : num_msgs
             old = A' * W(:,:,I-1);
             m_old = my_transform(old,mTo(:,:,I-1));
             m_new = my_transform(V(I,1).field,mTo(:,:,I));
-            A = adjust_A(A,m_old,m_new,miss_mrkrs(I-1));
+            [A,m_new] = adjust_A(A,m_old,m_new,miss_mrkrs(I-1));
             W(:,:,I) = A * V(I,1).field;
-            
             
         end
         
@@ -92,14 +89,10 @@ for I = 2 : num_msgs
             old = A' * W(:,:,I-1);
             m_old = my_transform(old,mTo(:,:,I-1));
             m_new = my_transform(V(I,1).field,mTo(:,:,I));
-            A = adjust_A(A,m_old,m_new,miss_mrkrs(I-1));
+            [A,m_new] = adjust_A(A,m_old,m_new,miss_mrkrs(I-1));
             
-            old = A' * W(:,:,I-1);
-            m_old = my_transform(old,mTo(:,:,I-1));
-            m_new = my_transform(V(I,1).field,mTo(:,:,I));
-            % settare bene la thresh
-            W(:,:,I) = get_W_hat(m_old,m_new,A,oTm(:,:,I));
-            
+            new = my_transform(m_new,oTm(:,:,I));
+            W(:,:,I) = A * new;
             
         end
     end
