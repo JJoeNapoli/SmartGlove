@@ -57,25 +57,43 @@ A=findA(V(1,1).field,mVdes,mTo(:,:,1));
 %%  check if some data are lost and sort them
 
 num_mrks=size(V(I,1).field);
-for I=1:num_msgs
+for I = 1 : num_msgs
     
     if num_mrks == size(V(I,1).field)
         %% W
-        W(:,:,I) = A * V(1,1).field;
+        W(:,:,I) = A * V(I,1).field;
         
     else
+        %%questo funziona (forse) per un solo mrkr 
+        % trova il buco dati i vettori non ordinati
         old = A' * W(:,:,I-1);
-        mlast_pos = my_transform(old,mTo);
-        % vado a vedere le diff dei vettori ripetto a m, il primo
+        % usiamo W  e lo disordiniamo perché almeno abbiamo la posizione
+        % precedente già aggiustata (se usassimo V e se in due msgs 
+        % consecutivi mancasse un mrk sarebbe merda)
+
+        m_old = my_transform(old,mTo(:,:,I-1));
+        m_new = my_transform(V(I,1).field,mTo(:,:,I));
+        % settare bene la thresh
+        ind = find_lost(m_old,m_new,0.05); 
+        
+        % mi calcola la nuova matrice A
+        old_correlation = A(ind,:);
+        A(ind,:)=[];
+        A=[A;old_correlation];
+        
+        % aggiusta W
+        m_new = [m_new ; m_old(ind,:)];
+        new = my_transform(m_new,oTm(:,:,I));
+        W(:,:,I) = A * new;
+        
+        % vado a vedere le diff dei vettori rispetto a m, il primo
         % più grande è la posizione (ind) di quello scomparso,
         % bisogna farlo per più volte, finché non si raggiunge il numero di
         % markrs iniziale
         % trovato quello scomparso gli si da la stessa posizione relativa
         % di prima
-        % usiamo W  e lo disordiniamo perché almeno abbiamo la posizione
-        % precedente già aggiustata (se usassimo V e se in due msgs 
-        % consecutivi mancasse un mrk sarebbe merda)
     end
+    
 end
 
 
@@ -104,17 +122,7 @@ nocche=my_transform(mnocche,oTm(:,:,1));
 % mV=my_transform(V(1,1).field,mTo(:,:,1));
 % my_plot([mV;mnocche]);
 
-my_skeleton(W,nocche)
+my_skeleton(W(:,:,1),nocche)
 
-%%
-num_mrks=size(V(1,1).field,1);
-for i=1:num_msgs
-    min_mrkrs(i)=(size(V(i,1).field,1));
-    if num_mrks ~= min_mrkrs(i)
-        i
-        min_mrks(i)
-    end
-end
-% min_mrkrs
-% min(min_mrkrs)
+
 
