@@ -3,6 +3,9 @@ clc
 clear
 close all
 
+%% load knucles
+load("knucles.mat")
+
 %% load bag file
 bag_name="../../bag_file/mano_rb.bag";        %qualche mrks in più ma mai in meno
 
@@ -55,74 +58,59 @@ mVdes=set_Vdes(V,mTo(:,:,1));
 A=findA(V(1,1).field,mVdes,mTo(:,:,1));
 
 %%  check if some data are lost and sort them
-
-num_mrks=size(V(I,1).field);
-for I = 1 : num_msgs
+clc
+num_mrkrs=size(V(1,1).field,1);
+for I = 2 : num_msgs
+    miss_mrkrs(I) = abs(num_mrkrs-size(V(I,1).field,1));
     
-    if num_mrks == size(V(I,1).field)
-        %% W
-        W(:,:,I) = A * V(I,1).field;
+    if miss_mrkrs(I) == 0
+        if miss_mrkrs(I-1) <= 1
+            W(:,:,I) = A * V(I,1).field;
+            
+        else
+            % controllo su A
+            % A(1:num_mrkrs-miss_mrkrs(I-1),:) questa va bene
+            old = A' * W(:,:,I-1);
+            m_old = my_transform(old,mTo(:,:,I-1));
+            m_new = my_transform(V(I,1).field,mTo(:,:,I));
+            A = adjust_A(A,m_old,m_new,miss_mrkrs(I-1));
+            W(:,:,I) = A * V(I,1).field;
+            
+            
+        end
         
     else
-        %%questo funziona (forse) per un solo mrkr 
-        % trova il buco dati i vettori non ordinati
-        old = A' * W(:,:,I-1);
-        % usiamo W  e lo disordiniamo perché almeno abbiamo la posizione
-        % precedente già aggiustata (se usassimo V e se in due msgs 
-        % consecutivi mancasse un mrk sarebbe merda)
-
-        m_old = my_transform(old,mTo(:,:,I-1));
-        m_new = my_transform(V(I,1).field,mTo(:,:,I));
-        % settare bene la thresh
-        ind = find_lost(m_old,m_new,0.05); 
         
-        % mi calcola la nuova matrice A
-        old_correlation = A(ind,:);
-        A(ind,:)=[];
-        A=[A;old_correlation];
-        
-        % aggiusta W
-        m_new = [m_new ; m_old(ind,:)];
-        new = my_transform(m_new,oTm(:,:,I));
-        W(:,:,I) = A * new;
-        
-        % vado a vedere le diff dei vettori rispetto a m, il primo
-        % più grande è la posizione (ind) di quello scomparso,
-        % bisogna farlo per più volte, finché non si raggiunge il numero di
-        % markrs iniziale
-        % trovato quello scomparso gli si da la stessa posizione relativa
-        % di prima
+        if miss_mrkrs(I) >= miss_mrkrs(I-1)
+            old = A' * W(:,:,I-1);
+            m_old = my_transform(old,mTo(:,:,I-1));
+            m_new = my_transform(V(I,1).field,mTo(:,:,I));
+            % settare bene la thresh
+            W(:,:,I) = get_W_hat(m_old,m_new,A,oTm(:,:,I));
+            
+        else % ho paura, controlla
+            old = A' * W(:,:,I-1);
+            m_old = my_transform(old,mTo(:,:,I-1));
+            m_new = my_transform(V(I,1).field,mTo(:,:,I));
+            A = adjust_A(A,m_old,m_new,miss_mrkrs(I-1));
+            
+            old = A' * W(:,:,I-1);
+            m_old = my_transform(old,mTo(:,:,I-1));
+            m_new = my_transform(V(I,1).field,mTo(:,:,I));
+            % settare bene la thresh
+            W(:,:,I) = get_W_hat(m_old,m_new,A,oTm(:,:,I));
+            
+            
+        end
     end
-    
+    %     %% compute the following knucles
+    %     nocche=my_transform(mnocche,oTm(:,:,I));
+    %     figure(1),hold on,axis equal,grid on, %view(3),
+    %     my_skeleton(W(:,:,I),nocche)
+    %     hold off
+    %     pause(0.01);
 end
 
-
-% graph
-% plot the cleaned data
-
-% figure(),hold on
-% axis equal
-% plot3(V(1,1).field(:,1),V(1,1).field(:,2),V(1,1).field(:,3),'or')
-% plot3(RB(1,1).field(1,1),RB(1,1).field(1,2),RB(1,1).field(1,3),'ob'),
-% grid on
-%
-% my_plot(V(1,1).field);
-% my_plot(W);
-%
-% my_plot(mVdes)
-
-
-%% load knucles
-load("knucles.mat")
-
-%% compute the following knucles
-nocche=my_transform(mnocche,oTm(:,:,1));
-% my_plot([W;nocche]);
-%
-% mV=my_transform(V(1,1).field,mTo(:,:,1));
-% my_plot([mV;mnocche]);
-
-my_skeleton(W(:,:,1),nocche)
 
 
 
