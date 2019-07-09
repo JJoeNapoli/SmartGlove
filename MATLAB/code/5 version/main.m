@@ -1,13 +1,18 @@
+main_nocche
+set_Vdes
+
 %% tf rviz sucks
 clc
 clear
 close all
 
+
 %% load knucles
 load("knucles.mat")
+load("desired_config.mat")
 
 %% load bag file
-bag_name="../../bag_file/mano_rb.bag";        %qualche mrks in più ma mai in meno
+bag_name="../../bag_file/tutta_mano_difettosa.bag";        %qualche mrks in più ma mai in meno
 
 [V,RB]=load_and_fill(bag_name);
 
@@ -45,12 +50,8 @@ for I=1:num_msgs
 end
 
 %% set Vdes
-% da oTm andiamo a fare l'inversa mTo
-% ogni marker lo salviamo relativamente
-% nell'ordine che preferiamo
-% questo è Vdes
 
-mVdes=set_Vdes(V,mTo(:,:,1));
+% mVdes=set_Vdes(V,mTo(:,:,1));
 
 %% findA
 A=findA(V(1,1).field,mVdes,mTo(:,:,1));

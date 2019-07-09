@@ -1,5 +1,6 @@
 %% load and fill the structs
 function [V,RB] = load_and_fill(bag_name)
+
 % load the bag file
 bag = rosbag(bag_name);         
 
@@ -24,10 +25,6 @@ end
 for i=1:length(msgs_rb)
     RB(i,1).field=[msgs_rb{i,1}.Pose.Position.X,msgs_rb{i,1}.Pose.Position.Y,msgs_rb{i,1}.Pose.Position.Z];
 end
-
-
-
-
 
 
 end
