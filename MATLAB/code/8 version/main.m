@@ -1,5 +1,5 @@
-main_nocche
-set_Vdes
+% main_nocche
+set_Vdes2
 
 %% tf rviz sucks
 clc
@@ -12,10 +12,10 @@ load("knucles.mat")
 load("desired_config.mat")
 
 %% load bag file
-bag_name="../../bag_file/2019-07-09-17-43-50.bag";      
+bag_name="../../bag_file/2019-07-09-17-37-07.bag";      
 
 [V_struct,RB_struct]=load_and_fill(bag_name);
-
+% my_plot(V_struct(1).field)
 % bag = rosbag("../../bag_file/nocche_rb.bag");
 % bag = rosbag("../../bag_file/test.bag");
 % bag = rosbag("../../bag_file/due_mrkrs.bag");
@@ -26,7 +26,7 @@ bag_name="../../bag_file/2019-07-09-17-43-50.bag";
 %% clean from bad data
 [V,RB]=clean_noises(V_struct,RB_struct);
 clear V_struct RB_struct;
-
+% my_plot(V(1).field)
 %% transformation matrix for each msg
 num_msgs=min(length(V),length(RB));
 
@@ -50,6 +50,7 @@ end
 %% findA
 A=findA(V(1,1).field,mVdes,mTo(:,:,1));
 W(:,:,1) = A * V(1,1).field;
+my_plot(W(:,:,1))
 figure(1),
 
 %% sort data
