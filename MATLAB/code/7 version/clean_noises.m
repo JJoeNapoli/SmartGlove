@@ -17,12 +17,14 @@ for i=1:num_msgs
         end
     end
 end
-ind=1;
+step=1;
+V(step,1).field = 0;
+RB(step,1).field = 0;
 for i = 1 : num_msgs
-   if size(V_struct(i,1).field,1) ==  size(V_struct(1,1).field,1)       
-       V(:,:,ind) = V_struct(i,1).field;
-       RB(:,:,ind) = RB_struct(i,1).field;
-       ind=ind+1;
+   if size(V_struct(i,1).field,1) <=  size(V_struct(1,1).field,1)       
+       V(step,1).field = V_struct(i,1).field;
+       RB(step,1).field = RB_struct(i,1).field;
+       step=step+1;
    end
 end
 end

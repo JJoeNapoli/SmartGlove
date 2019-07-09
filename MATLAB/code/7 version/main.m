@@ -1,5 +1,5 @@
-main_nocche
-set_Vdes
+% main_nocche
+% set_Vdes
 
 %% tf rviz sucks
 clc
@@ -25,15 +25,15 @@ bag_name="../../bag_file/tutta_mano_difettosa.bag";        %qualche mrks in più 
 
 %% clean from bad data
 [V,RB]=clean_noises(V_struct,RB_struct);
+clear V_struct RB_struct;
 
 %% transformation matrix for each msg
-
-num_msgs=min(size(V,3),size(RB,3));
+num_msgs=min(length(V),length(RB));
 
 for I=1:num_msgs
     %% set orientation and remove non IMUs
     
-    [oRm,ind]=set_orient(V(:,:,I),RB(:,:,I));
+    [oRm,ind]=set_orient(V(I,1).field,RB(I,1).field);
     [V,RB]=move_nonimu(V,RB,I,ind);
     
     %% set oTm and mTo
@@ -86,7 +86,7 @@ for I = 2 : num_msgs
             % settare bene la thresh
             W(:,:,I) = get_W_hat(m_old,m_new,A,oTm(:,:,I));
             
-        else % ho paura, controlla
+        else
             old = A' * W(:,:,I-1);
             m_old = my_transform(old,mTo(:,:,I-1));
             m_new = my_transform(V(I,1).field,mTo(:,:,I));
@@ -97,14 +97,14 @@ for I = 2 : num_msgs
             
         end
     end
-    %     %% compute the following knucles
-    %     nocche=my_transform(mnocche,oTm(:,:,I));
-    %     figure(1),hold on,axis equal,grid on, %view(3),
-    %     my_skeleton(W(:,:,I),nocche)
-    %     hold off
-    %     pause(0.01);
+    I
+    nocche=my_transform(mnocche,oTm(:,:,I));
+    my_skeleton(W(:,:,I),nocche)
+    
 end
-
+%% compute the following knucles
+I=2;
+%         pause(0.01);
 
 
 

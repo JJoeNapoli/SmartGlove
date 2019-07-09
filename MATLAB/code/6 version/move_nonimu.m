@@ -1,13 +1,13 @@
-function [V,RB]=move_nonimu(V,RB,i,ind)
+function [V_i,RB]=move_nonimu(V,RB,i,ind)
 
 % num_msgs=min(length(V),length(RB));
-
+V_i(:,:)=V(:,:,i);
 ind=sort(ind,'descend');
 for j=1:length(ind)
-    RB(i,2).field(j,:) = V(i,1).field(ind(j),:);
-    V(i,1).field(ind(j),:)=[];
+    RB(1+j,:,i) = V_i(ind(j),:);
+    V_i(ind(j),:) = [];
 end
 % add the CM as a sensor
-V(i,1).field=[RB(i,1).field; V(i,1).field];
+V_i(:,:) = [RB(1,:,i); V_i(:,:)];
 end
 
