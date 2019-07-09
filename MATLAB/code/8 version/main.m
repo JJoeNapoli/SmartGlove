@@ -1,5 +1,5 @@
-% main_nocche
-% set_Vdes
+main_nocche
+set_Vdes
 
 %% tf rviz sucks
 clc
@@ -12,7 +12,7 @@ load("knucles.mat")
 load("desired_config.mat")
 
 %% load bag file
-bag_name="../../bag_file/tutta_mano_difettosa.bag";        %qualche mrks in più ma mai in meno
+bag_name="../../bag_file/2019-07-09-17-43-50.bag";      
 
 [V_struct,RB_struct]=load_and_fill(bag_name);
 
@@ -32,19 +32,17 @@ num_msgs=min(length(V),length(RB));
 
 for I=1:num_msgs
     %% set orientation and remove non IMUs
-    
     [oRm,ind]=set_orient(V(I,1).field,RB(I,1).field);
     [V,RB]=move_nonimu(V,RB,I,ind);
     
     %% set oTm and mTo
-    
     oTm(:,:,I)=[   oRm,        RB(I,1).field';
         zeros(1,3),     1];
     mTo(:,:,I)=[   oRm^-1,       (-oRm^-1)*RB(I,1).field';
         zeros(1,3),     1];
     %     oTm(:,:,I)*mTo(:,:,I) %=eye(4)
-    %% homogeneous coordiantes
     
+    %% homogeneous coordiantes   
     V(I,1).field=[V(I,1).field,ones(size(V(I,1).field,1),1)];
     
 end
@@ -58,9 +56,7 @@ figure(1),
 clc
 num_mrkrs=size(V(1,1).field,1);
 for I = 2 : num_msgs
-    if I == 258
-        I
-    end
+    
     %% don't worry be happy
     [W(:,:,I),A]= my_sort(V(I,1).field,W(:,:,I-1),A,mTo(:,:,I),mTo(:,:,I-1),oTm(:,:,I));
     I

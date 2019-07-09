@@ -52,13 +52,17 @@
 %     RB(i,1).field=[msgs_rb{i,1}.Pose.Position.X,msgs_rb{i,1}.Pose.Position.Y,msgs_rb{i,1}.Pose.Position.Z];
 % end
 %
-k=0
-for i = 1:10
-    for j = 1:100
-        if j==10
-            k=k+1
-            break
-        end
-    end
-    
-end
+% k=0
+% for i = 1:10
+%     for j = 1:100
+%         if j==10
+%             k=k+1
+%             break
+%         end
+%     end
+%     
+% end
+
+my_plot(V(1504).field)
+my_plot(V(1505).field)
+my_plot(V(1506).field)
