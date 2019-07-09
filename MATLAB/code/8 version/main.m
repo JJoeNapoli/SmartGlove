@@ -49,62 +49,27 @@ for I=1:num_msgs
     
 end
 
-%% set Vdes
-
-% mVdes=set_Vdes(V,mTo(:,:,1));
-
 %% findA
 A=findA(V(1,1).field,mVdes,mTo(:,:,1));
+W(:,:,1) = A * V(1,1).field;
 figure(1),
-%%  check if some data are lost and sort them
+
+%% sort data
 clc
 num_mrkrs=size(V(1,1).field,1);
 for I = 2 : num_msgs
-    if I== 132
+    if I == 258
         I
     end
-    miss_mrkrs(I) = abs(num_mrkrs-size(V(I,1).field,1));
-    
-    if miss_mrkrs(I) == 0
-        if miss_mrkrs(I-1) <= 1
-            W(:,:,I) = A * V(I,1).field;
-            
-        else
-            % controllo su A
-            % A(1:num_mrkrs-miss_mrkrs(I-1),:) questa va bene
-            old = A' * W(:,:,I-1);
-            m_old = my_transform(old,mTo(:,:,I-1));
-            m_new = my_transform(V(I,1).field,mTo(:,:,I));
-            [A,m_new] = adjust_A(A,m_old,m_new,miss_mrkrs(I-1));
-            W(:,:,I) = A * V(I,1).field;
-            
-        end
-        
-    else
-        
-        if miss_mrkrs(I) >= miss_mrkrs(I-1)
-            old = A' * W(:,:,I-1);
-            m_old = my_transform(old,mTo(:,:,I-1));
-            m_new = my_transform(V(I,1).field,mTo(:,:,I));
-            % settare bene la thresh
-            W(:,:,I) = get_W_hat(m_old,m_new,A,oTm(:,:,I));
-            
-        else
-            old = A' * W(:,:,I-1);
-            m_old = my_transform(old,mTo(:,:,I-1));
-            m_new = my_transform(V(I,1).field,mTo(:,:,I));
-            [A,m_new] = adjust_A(A,m_old,m_new,miss_mrkrs(I-1));
-            
-            new = my_transform(m_new,oTm(:,:,I));
-            W(:,:,I) = A * new;
-            
-        end
-    end
+    %% don't worry be happy
+    [W(:,:,I),A]= my_sort(V(I,1).field,W(:,:,I-1),A,mTo(:,:,I),mTo(:,:,I-1),oTm(:,:,I));
     I
+    
+    %% mangia un pochino, figgeu
     nocche=my_transform(mnocche,oTm(:,:,I));
     
     my_skeleton(W(:,:,I),nocche)
-    pause(0.1)
+    pause(0.01)
     clf
 end
 %% compute the following knucles
