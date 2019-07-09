@@ -55,11 +55,14 @@ end
 
 %% findA
 A=findA(V(1,1).field,mVdes,mTo(:,:,1));
-
+figure(1),
 %%  check if some data are lost and sort them
 clc
 num_mrkrs=size(V(1,1).field,1);
 for I = 2 : num_msgs
+    if I== 132
+        I
+    end
     miss_mrkrs(I) = abs(num_mrkrs-size(V(I,1).field,1));
     
     if miss_mrkrs(I) == 0
@@ -99,11 +102,16 @@ for I = 2 : num_msgs
     end
     I
     nocche=my_transform(mnocche,oTm(:,:,I));
-    my_skeleton(W(:,:,I),nocche)
     
+    my_skeleton(W(:,:,I),nocche)
+    pause(0.1)
+    clf
 end
 %% compute the following knucles
-I=2;
+close all
+I=132;
+nocche=my_transform(mnocche,oTm(:,:,I));
+my_skeleton(W(:,:,I),nocche)
 %         pause(0.01);
 
 
