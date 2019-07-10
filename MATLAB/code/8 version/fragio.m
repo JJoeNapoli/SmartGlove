@@ -62,5 +62,13 @@
 %     end
 %     
 % end
-my_plot(mVnew);
+close all
+figure(1),
+for I = 1:num_msgs
+    hold on,axis([-0.05 0.2 -0.3 0.05 0.3 0.8]),grid on, view(3),
+    plot3(W(:,1,I), W(:,2,I), W(:,3,I),'Marker', 'o', 'Color', 'red','MarkerSize', 9);
+    
+    pause(0.1)
+    clf
+end
 % my_plot(mVold)

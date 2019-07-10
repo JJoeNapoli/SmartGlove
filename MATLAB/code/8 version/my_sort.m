@@ -1,8 +1,6 @@
 %% get W from any possible fucking situation
 function [W,A] = my_sort(Vnew,Wold,A,mTo_new,mTo_old,oTm_new)
 
-
-
 % 
 % Vnew=V(2,1).field;
 % Wold=W(:,:,1);
@@ -25,6 +23,7 @@ while count ~= size(diff,1)-1
     for i = 2 : size(diff,1)
         if diff(i,1:3) == mVold(i,1:3)
             mVnew=[mVnew;mVold(i,:)];
+            
             break
             
         elseif max(abs(diff(i,:)))>0.015
