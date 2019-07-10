@@ -62,7 +62,5 @@
 %     end
 %     
 % end
-
-my_plot(V(1504).field)
-my_plot(V(1505).field)
-my_plot(V(1506).field)
+my_plot(mVnew);
+% my_plot(mVold)

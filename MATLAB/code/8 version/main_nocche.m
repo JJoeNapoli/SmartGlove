@@ -40,7 +40,7 @@ mnocche=my_transform(nocche,mTo(:,:,1));
 
 %% graph
 my_plot(mnocche);
-my_plot(nocche);
+% my_plot(nocche);
 
 %% save nocche
 save("knucles","mnocche");

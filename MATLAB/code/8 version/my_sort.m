@@ -18,16 +18,16 @@ mVnew = my_transform(Vnew,mTo_new);
 
 diff = my_diff(mVold,mVnew);
 count=0;
-while count ~= size(diff,1)
+while count ~= size(diff,1)-1
     %% 3D differences
     diff = my_diff(mVold,mVnew);
     count=0;
-    for i = 1 : size(diff,1)
-        if diff(i,:) == mVold(i,:)
+    for i = 2 : size(diff,1)
+        if diff(i,1:3) == mVold(i,1:3)
             mVnew=[mVnew;mVold(i,:)];
             break
             
-        elseif max(abs(diff(i,:)))>0.008
+        elseif max(abs(diff(i,:)))>0.015
             % change mVold
             temp=mVold(i,:);
             mVold(i,:)=[];

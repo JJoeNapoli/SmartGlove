@@ -47,7 +47,7 @@ Vdes=[Vdes, ones(12,1)];
 mVdes=my_transform(Vdes,mTo(:,:,1));
 
 %% graph
-my_plot(mVdes);
+% my_plot(mVdes);
 
 %% save desired_config
 save("desired_config","mVdes");
