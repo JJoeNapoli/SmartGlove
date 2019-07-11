@@ -1,6 +1,5 @@
 %% get W from any possible fucking situation
-function [W,A] = my_sort(Vnew,Wold,A,mTo_new,mTo_old,oTm_new)
-
+function [W,A,no_faith] = my_sort(Vnew,Wold,A,mTo_new,mTo_old,oTm_new)
 
 %% get mVold
 Vold = A' * Wold;
@@ -13,7 +12,13 @@ mVold_backup=mVold;
 %% get mVnew
 mVnew = my_transform(Vnew,mTo_new);
 
+%% initialize diff
 diff = my_diff(mVold,mVnew);
+
+%% I wanna trust you
+no_faith=true(size(diff,1),1);
+
+%% initialize while loop
 count=0;
 forced_break=0;
 while count ~= size(diff,1)-1
@@ -41,14 +46,17 @@ while count ~= size(diff,1)-1
         else
             count = count+1;
         end
-        if forced_break == 1000
-            mVnew=mVold_backup;
-            A=A_backup;
-            break
-        end
+        
     end
     count;
     forced_break=forced_break+1;
+    if forced_break == 1000
+        mVnew=mVold_backup;
+        A=A_backup;
+        % but I can't
+        no_faith=false(size(diff,1),1);
+        break
+    end
 end
 
 
