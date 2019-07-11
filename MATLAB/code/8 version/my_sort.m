@@ -1,21 +1,21 @@
 %% get W from any possible fucking situation
 function [W,A] = my_sort(Vnew,Wold,A,mTo_new,mTo_old,oTm_new)
 
-% 
-% Vnew=V(2,1).field;
-% Wold=W(:,:,1);
-% mTo_new=mTo(:,:,2);
-% mTo_old=mTo(:,:,1);
-% oTm_new=oTm(:,:,2);
+
 %% get mVold
 Vold = A' * Wold;
 mVold = my_transform(Vold,mTo_old);
+
+%% keep backup
+A_backup=A;
+mVold_backup=mVold;
 
 %% get mVnew
 mVnew = my_transform(Vnew,mTo_new);
 
 diff = my_diff(mVold,mVnew);
 count=0;
+forced_break=0;
 while count ~= size(diff,1)-1
     %% 3D differences
     diff = my_diff(mVold,mVnew);
@@ -41,9 +41,14 @@ while count ~= size(diff,1)-1
         else
             count = count+1;
         end
-        
+        if forced_break == 1000
+            mVnew=mVold_backup;
+            A=A_backup;
+            break
+        end
     end
-    count
+    count;
+    forced_break=forced_break+1;
 end
 
 
