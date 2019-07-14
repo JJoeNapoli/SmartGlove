@@ -81,7 +81,7 @@ for I = ii+1 : num_msgs
         I;
     end
     
-    %% don't worry be happy
+    %% W is V sorted
     [W(:,:,I),A,no_faith]= my_sort(V(I,1).field,W(:,:,I-1),A,mTo(:,:,I),mTo(:,:,I-1),oTm(:,:,I));
     num_msgs
     I
@@ -89,7 +89,8 @@ for I = ii+1 : num_msgs
     if no_faith(1,1) == false
         trustV(:,I)= no_faith;
     end
-    %% mangia un pochino, figgeu!
+    
+    %% plot the skeleton
     nocche=my_transform(mnocche,oTm(:,:,I));
     Itrust=A*trustV(:,I);
     my_skeleton(W(:,:,I),nocche,Itrust)
