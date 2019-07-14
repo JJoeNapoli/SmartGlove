@@ -12,7 +12,7 @@ load("desired_config.mat")
 
 %% load bag file
 
-bag_name="../../bag_file/m_6e8_p_far.bag";
+% bag_name="../../bag_file/m_6e8_p_far.bag";
 % bag_name="../../bag_file/ref_incl_up_down_br.bag";
 % bag_name="../../bag_file/ref_incl.bag";
 % bag_name="../../bag_file/up_down.bag";
@@ -24,7 +24,7 @@ bag_name="../../bag_file/m_6e8_p_far.bag";
 % bag_name="../../bag_file/reference_calibration.bag";
 
 % TODO %%%%
-% bag_name="../../bag_file/move_objs.bag";% CONTROLLA
+bag_name="../../bag_file/move_objs.bag";% CONTROLLA
 % bag_name="../../bag_file/fist.bag";% CONTROLLA
 % bag_name="../../bag_file/ref_rest.bag";% CONTROLLA
 % bag_name="../../bag_file/clockwise.bag";% CONTROLLA
@@ -101,6 +101,9 @@ end
 nocche=my_transform(mnocche,oTm(:,:,I));
 
 my_skeleton(W(:,:,I),nocche,Itrust)
+
+%% plot how many markers do we see
+my_wave(trustV);
 
 
 
