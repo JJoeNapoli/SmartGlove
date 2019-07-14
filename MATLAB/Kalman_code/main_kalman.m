@@ -1,44 +1,15 @@
-% set_Vdes
-% main_nocche
-
-%% MOCAP OPTITRACK PLOTTING HAND
-%% tf rviz sucks
+%% KALMAN FILTER PLOTTING HAND
 clc
 clear
 close all
-
-%% load knucles
-load("knucles.mat")
-load("desired_config.mat")
-
-%% load bag file
-
+%%
 % bag_name="../../bag_file/m_6e8_p_far.bag";
-% bag_name="../../bag_file/ref_incl_up_down_br.bag";
-% bag_name="../../bag_file/ref_incl.bag";
-% bag_name="../../bag_file/up_down.bag";
-% bag_name="../../bag_file/m_anul_mign.bag";
-% bag_name="../../bag_file/m_pollice.bag";
-% bag_name="../../bag_file/ref_p_far_mrkrs.bag";
-% bag_name="../../bag_file/ref_calib_other_side.bag";
-% bag_name="../../bag_file/reference_calibration_2.bag";
-% bag_name="../../bag_file/reference_calibration.bag";
-
-% TODO %%%%
-% bag_name="../../bag_file/move_objs.bag";% CONTROLLA
-% bag_name="../../bag_file/fist.bag";% CONTROLLA
-% bag_name="../../bag_file/ref_rest.bag";% CONTROLLA
-% bag_name="../../bag_file/clockwise.bag";% CONTROLLA
-% bag_name="../../bag_file/up_down_broken.bag";% CONTROLLA
-% bag_name="../../bag_file/m_anul_mign_2.bag"; % CONTROLLA
 
 [V_struct,RB_struct]=load_and_fill(bag_name);
-% my_plot(V_struct(1).field)
 
 %% clean from bad data
 [V,RB]=clean_noises(V_struct,RB_struct);
 clear V_struct RB_struct;
-% my_plot(V(1).field)
 
 %% transformation matrix for each msg
 num_msgs=min(length(V),length(RB));
@@ -106,6 +77,21 @@ my_skeleton(W(:,:,I),nocche,Itrust)
 
 %% plot how many markers do we see
 my_wave(trustV);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
