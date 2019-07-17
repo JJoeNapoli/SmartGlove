@@ -3,22 +3,25 @@ clc
 clear
 close all
 %%
-% bag_name="../../bag_file/m_6e8_p_far.bag";
-
+bag_name="../bag_file/modified/2019-07-16-22-28-00.bag";
+%%% AGGIUSTA QUESTA FUNZIONE
 [V_struct,RB_struct]=load_and_fill(bag_name);
 
 %% clean from bad data
+%%% MAYBE NOT NEDED
 [V,RB]=clean_noises(V_struct,RB_struct);
 clear V_struct RB_struct;
 
-%% transformation matrix for each msg
+%% setting the dimensions
 num_msgs=min(length(V),length(RB));
 
-%% how much do we trust Vyou?
+%% how much do we trust V?
+%%% NOT NEEDED
 trustV=false(size(mVdes,1),num_msgs);
 
 for I=1:num_msgs
     %% set orientation and remove non IMUs
+    %%% ABSOLUTE CHANGE
     [oRm,ind]=set_orient(V(I,1).field,RB(I,1).field);
     [V,RB]=move_nonimu(V,RB,I,ind);
     

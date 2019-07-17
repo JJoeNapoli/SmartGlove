@@ -4,7 +4,7 @@ clear
 close all
 
 %% load bag file
-bag_name="../../bag_file/knucles.bag";        
+bag_name="../bag_file/knucles.bag";        
 [V_struct,RB_struct]=load_and_fill(bag_name);
 
 %% clean fromm bad data

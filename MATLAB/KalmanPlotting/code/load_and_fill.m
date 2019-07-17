@@ -5,10 +5,11 @@ function [V,RB] = load_and_fill(bag_name)
 bag = rosbag(bag_name);         
 
 % select the topics
+%%% SET THE TOPIC
 markers_coo=select(bag,'Topic','markers_coo');
 rigidbody_pose=select(bag,'Topic','Robot_1/pose');
 
-
+%%% SET THE RIGHT MESSAGE
 msgs_mrks = readMessages(markers_coo,    'DataFormat','struct');
 msgs_rb   = readMessages(rigidbody_pose, 'DataFormat','struct');
 

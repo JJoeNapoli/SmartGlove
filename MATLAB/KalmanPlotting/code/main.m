@@ -13,7 +13,7 @@ load("desired_config.mat")
 
 %% load bag file
 
-% bag_name="../../bag_file/m_6e8_p_far.bag";
+bag_name="../bag_file/m_6e8_p_far.bag";
 % bag_name="../../bag_file/ref_incl_up_down_br.bag";
 % bag_name="../../bag_file/ref_incl.bag";
 % bag_name="../../bag_file/up_down.bag";
