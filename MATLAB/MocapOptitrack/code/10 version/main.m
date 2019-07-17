@@ -25,7 +25,7 @@ load("desired_config.mat")
 % bag_name="../../bag_file/reference_calibration.bag";
 
 % TODO %%%%
-% bag_name="../../bag_file/move_objs.bag";% CONTROLLA
+bag_name="../../bag_file/move_objs.bag";% CONTROLLA
 % bag_name="../../bag_file/fist.bag";% CONTROLLA
 % bag_name="../../bag_file/ref_rest.bag";% CONTROLLA
 % bag_name="../../bag_file/clockwise.bag";% CONTROLLA
