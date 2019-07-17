@@ -15,7 +15,9 @@ format long
 % B=A'
 % C=A'*W
 
-bag_name="../bag_file/reference_calibration.bag";
+% bag_name="../bag_file/modified/2019-07-16-22-28-00.bag";
+bag_name="../bag_file/not_modified/2019-07-16-22-16-33.bag";
+
 bag = rosbag(bag_name);         
 markers_coo=select(bag,'Topic','markers_coo');
 rigidbody_pose=select(bag,'Topic','Robot_1/pose');
