@@ -17,7 +17,7 @@ I=1;
 %% set orientation and remove non IMUs
 [oRm,ind]=set_orient(V(I,1).field,RB(I,1).field);
 [V,RB]=move_nonimu(V,RB,I,ind);
-my_plot(V(1,1).field);
+% my_plot(V(1,1).field);
 %% set oTm and mTo
 oTm(:,:,I)=[   oRm,        RB(I,1).field';
     zeros(1,3),     1];
