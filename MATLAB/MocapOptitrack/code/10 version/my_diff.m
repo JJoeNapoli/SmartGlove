@@ -1,3 +1,4 @@
+%% calcola le differenze tra due vettori di dimensioni diverse
 function diff = my_diff(v,w)
 size_v=size(v,1);
 size_w=size(w,1);
