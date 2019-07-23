@@ -1,5 +1,5 @@
-% set_Vdes
-% main_nocche
+set_Vdes
+main_nocche
 
 %% MOCAP OPTITRACK PLOTTING HAND
 %% tf rviz sucks
@@ -17,13 +17,13 @@ load("desired_config.mat")
 % bag_name="../../bag_file/ref_incl_up_down_br.bag";
 % bag_name="../../bag_file/ref_incl.bag";
 % bag_name="../../bag_file/up_down.bag";
-bag_name="../../bag_file/m_anul_mign.bag";
+% bag_name="../../bag_file/m_anul_mign.bag";
 % bag_name="../../bag_file/m_pollice.bag";
 % bag_name="../../bag_file/ref_p_far_mrkrs.bag";
 % bag_name="../../bag_file/ref_calib_other_side.bag";
 % bag_name="../../bag_file/reference_calibration_2.bag";
 % bag_name="../../bag_file/reference_calibration.bag";
-
+bag_name="../../bag_file/23/onda.bag";
 % TODO %%%%
 % bag_name="../../bag_file/move_objs.bag";% CONTROLLA
 % bag_name="../../bag_file/fist.bag";% CONTROLLA
