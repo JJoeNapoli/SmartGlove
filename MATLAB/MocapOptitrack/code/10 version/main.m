@@ -1,5 +1,5 @@
-set_Vdes
-main_nocche
+% main_reference
+% main_knucles
 
 %% MOCAP OPTITRACK PLOTTING HAND
 %% tf rviz sucks
@@ -13,24 +13,33 @@ load("desired_config.mat")
 
 %% load bag file
 
-% bag_name="../../bag_file/m_6e8_p_far.bag";
-% bag_name="../../bag_file/ref_incl_up_down_br.bag";
-% bag_name="../../bag_file/ref_incl.bag";
-% bag_name="../../bag_file/up_down.bag";
-% bag_name="../../bag_file/m_anul_mign.bag";
-% bag_name="../../bag_file/m_pollice.bag";
-% bag_name="../../bag_file/ref_p_far_mrkrs.bag";
-% bag_name="../../bag_file/ref_calib_other_side.bag";
-% bag_name="../../bag_file/reference_calibration_2.bag";
-% bag_name="../../bag_file/reference_calibration.bag";
+% good
+% bag_name="../../bag_file/good/m_6e8_p_far.bag";
+% bag_name="../../bag_file/good/ref_incl_up_down_br.bag";
+% bag_name="../../bag_file/good/ref_incl.bag";
+% bag_name="../../bag_file/good/up_down.bag";
+% bag_name="../../bag_file/good/m_anul_mign.bag";
+% bag_name="../../bag_file/good/m_pollice.bag";
+% bag_name="../../bag_file/good/ref_p_far_mrkrs.bag";
+% bag_name="../../bag_file/good/ref_calib_other_side.bag";
+% bag_name="../../bag_file/good/reference_calibration_2.bag";
+% bag_name="../../bag_file/good/reference_calibration.bag";
+
+% 23
+% bag_name="../../bag_file/23/clockwise.bag";
+% bag_name="../../bag_file/23/fist.bag";
+% bag_name="../../bag_file/23/indice_miscell.bag";
 bag_name="../../bag_file/23/onda.bag";
-% TODO %%%%
-% bag_name="../../bag_file/move_objs.bag";% CONTROLLA
-% bag_name="../../bag_file/fist.bag";% CONTROLLA
-% bag_name="../../bag_file/ref_rest.bag";% CONTROLLA
-% bag_name="../../bag_file/clockwise.bag";% CONTROLLA
-% bag_name="../../bag_file/up_down_broken.bag";% CONTROLLA
-% bag_name="../../bag_file/m_anul_mign_2.bag"; % CONTROLLA
+% bag_name="../../bag_file/23/reference.bag";
+% bag_name="../../bag_file/23/sequ_dita.bag";
+
+% broken
+% bag_name="../../bag_file/broken/move_objs.bag";
+% bag_name="../../bag_file/broken/fist.bag";
+% bag_name="../../bag_file/broken/ref_rest.bag";
+% bag_name="../../bag_file/broken/clockwise.bag";
+% bag_name="../../bag_file/broken/up_down_broken.bag";
+% bag_name="../../bag_file/broken/m_anul_mign_2.bag";
 
 [V_struct,RB_struct]=load_and_fill(bag_name);
 % my_plot(V_struct(1).field)

@@ -20,6 +20,9 @@ x=V(ind(1),:)-V(ind(2),:);
 x=x/norm(x);
 y=V(ind(1),:)-V(ind(3),:);
 y=y/norm(y);
+temp=x;
+x=-y;
+y=-temp;
 z=cross(x,y);
 oRm=[x',y',z'];
 
