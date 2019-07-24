@@ -4,8 +4,7 @@ clear
 close all
 
 %% load bag file
-% bag_name="../../bag_file/good/reference_calibration.bag";
-bag_name="../../bag_file/23/reference.bag";
+bag_name="../../bag_file/2019-07-09-17-37-07.bag";
 [V_struct,RB_struct]=load_and_fill(bag_name);
 
 %% clean fromm bad data
@@ -14,11 +13,12 @@ bag_name="../../bag_file/23/reference.bag";
 %% transformation matrix for first msg
 num_msgs=min(length(V),length(RB));
 I=1;
-
+% my_plot(V(1).field)
 %% set orientation and remove non IMUs
 [oRm,ind]=set_orient(V(I,1).field,RB(I,1).field);
 [V,RB]=move_nonimu(V,RB,I,ind);
-% my_plot(V(1,1).field);
+% my_plot(V(1).field)
+
 %% set oTm and mTo
 oTm(:,:,I)=[   oRm,        RB(I,1).field';
     zeros(1,3),     1];
@@ -27,36 +27,18 @@ mTo(:,:,I)=[   oRm^-1,       (-oRm^-1)*RB(I,1).field';
 
 %% set nocche (pollice,indice,...,polso)
 Vdes=zeros(12,3);
-
-% if bag is in 23
-
 Vdes(1,:)=V(1).field(1,:);
-Vdes(2,:)=V(1).field(8,:);
-Vdes(3,:)=V(1).field(10,:);
-Vdes(4,:)=V(1).field(12,:);
-Vdes(5,:)=V(1).field(11,:);
-Vdes(6,:)=V(1).field(3,:);
+Vdes(2,:)=V(1).field(6,:);
+Vdes(3,:)=V(1).field(3,:);
+Vdes(4,:)=V(1).field(4,:);
+Vdes(5,:)=V(1).field(5,:);
+Vdes(6,:)=V(1).field(7,:);
 Vdes(7,:)=V(1).field(2,:);
-Vdes(8,:)=V(1).field(6,:);
-Vdes(9,:)=V(1).field(5,:);
-Vdes(10,:)=V(1).field(7,:);
-Vdes(11,:)=V(1).field(4,:);
+Vdes(8,:)=V(1).field(12,:);
+Vdes(9,:)=V(1).field(10,:);
+Vdes(10,:)=V(1).field(11,:);
+Vdes(11,:)=V(1).field(8,:);
 Vdes(12,:)=V(1).field(9,:);
-
-% if bag is in good or broken
-
-% Vdes(1,:)=V(1).field(1,:);
-% Vdes(2,:)=V(1).field(10,:);
-% Vdes(3,:)=V(1).field(11,:);
-% Vdes(4,:)=V(1).field(9,:);
-% Vdes(5,:)=V(1).field(5,:);
-% Vdes(6,:)=V(1).field(8,:);
-% Vdes(7,:)=V(1).field(7,:);
-% Vdes(8,:)=V(1).field(4,:);
-% Vdes(9,:)=V(1).field(6,:);
-% Vdes(10,:)=V(1).field(3,:);
-% Vdes(11,:)=V(1).field(2,:);
-% Vdes(12,:)=V(1).field(12,:);
 
 %% homogeneous coordiantes
 Vdes=[Vdes, ones(12,1)];
@@ -65,7 +47,7 @@ Vdes=[Vdes, ones(12,1)];
 mVdes=my_transform(Vdes,mTo(:,:,1));
 
 %% graph
-my_plot(mVdes);
+% my_plot(mVdes);
 
 %% save desired_config
 save("desired_config","mVdes");

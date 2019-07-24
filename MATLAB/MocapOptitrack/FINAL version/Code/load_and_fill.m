@@ -30,6 +30,11 @@ msgs_mrks = readMessages(markers_coo,    'DataFormat','struct');
 msgs_rb   = readMessages(rigidbody_pose, 'DataFormat','struct');
 
 %% fill the structs
+% create the structs
+V_temp(1,1).field=0;
+RB_temp(1,1).field=0;
+V(1,1).field=0;
+RB(1,1).field=0;
 
 % fill the temporary structs
 for i=1:length(msgs_mrks)
@@ -42,8 +47,6 @@ end
 % fill the true structs
 j=0;
 for i=1:max([length(msgs_mrks),length(msgs_rb)])
-    if i==81
-    end
     if size(V_temp(i).field,1)~=0 && size(RB_temp(i).field,1)~=0
         j=j+1;
         V(j,1).field=V_temp(i,1).field;

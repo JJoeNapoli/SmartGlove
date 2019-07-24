@@ -12,5 +12,5 @@ for j = 1:num_msgs
     end
 end
 
-figure(2),hold on, ylim([0,15]), grid on, plot(point(1,:),point(2,:),'-b')
+figure(2),hold on, ylim([0,12]), grid on, plot(point(1,:),point(2,:),'-b')
 end

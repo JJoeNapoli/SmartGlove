@@ -1,36 +1,26 @@
-set_Vdes
-main_nocche
+% % % % % % % SMART  GLOVE  FOR  HUMAN-ROBOT  INTERACTION % % % % % % %
+% Authors:
+% Giovanni Napoli
+% Francesco Giovinazzo
 
-%% MOCAP OPTITRACK PLOTTING HAND
-%% tf rviz sucks
+%% MOTION CAPTURE MODULE
+
+% main_reference
+% main_knucles
 clc
 clear
 close all
 
-%% load knucles
+%% load knucles and the desired configuration
 load("knucles.mat")
 load("desired_config.mat")
 
-%% load bag file
-
-% bag_name="../../bag_file/m_6e8_p_far.bag";
-% bag_name="../../bag_file/ref_incl_up_down_br.bag";
-% bag_name="../../bag_file/ref_incl.bag";
-% bag_name="../../bag_file/up_down.bag";
-% bag_name="../../bag_file/m_anul_mign.bag";
-% bag_name="../../bag_file/m_pollice.bag";
-% bag_name="../../bag_file/ref_p_far_mrkrs.bag";
-% bag_name="../../bag_file/ref_calib_other_side.bag";
-% bag_name="../../bag_file/reference_calibration_2.bag";
-bag_name="../../bag_file/good/reference_calibration.bag";
-
-% TODO %%%%
-% bag_name="../../bag_file/move_objs.bag";% CONTROLLA
-% bag_name="../../bag_file/fist.bag";% CONTROLLA
-% bag_name="../../bag_file/ref_rest.bag";% CONTROLLA
-% bag_name="../../bag_file/clockwise.bag";% CONTROLLA
-% bag_name="../../bag_file/up_down_broken.bag";% CONTROLLA
-% bag_name="../../bag_file/m_anul_mign_2.bag"; % CONTROLLA
+%% load bag file and fill the structs
+% bag_name="../BagFile/clockwise.bag";
+ bag_name="../BagFile/fist.bag";
+% bag_name="../BagFile/indice_miscell.bag";
+% bag_name="../BagFile/reference.bag";
+% bag_name="../BagFile/sequ_dita.bag";
 
 [V_struct,RB_struct]=load_and_fill(bag_name);
 % my_plot(V_struct(1).field)
@@ -43,7 +33,7 @@ clear V_struct RB_struct;
 %% transformation matrix for each msg
 num_msgs=min(length(V),length(RB));
 
-%% how much do we trust Vyou?
+%% how much do we trust V?
 trustV=false(size(mVdes,1),num_msgs);
 
 for I=1:num_msgs
@@ -65,7 +55,7 @@ for I=1:num_msgs
     trustV(1:size(V(I,1).field,1),I)=true(size(V(I,1).field,1),1);
 end
 
-%% findA
+%% find the first sorting matrix A
 ii=1;
 A=eye(size(mVdes,1));
 Vdes = my_transform(mVdes,oTm(:,:,ii));
@@ -77,6 +67,7 @@ figure('units','normalized','outerposition',[0 0 1 1],'Resize','off'),
 %% sort data
 clc
 num_mrkrs=size(V(ii,1).field,1);
+angs=zeros(10,num_msgs);
 for I = ii+1 : num_msgs
     if I == 199
         I;
@@ -98,15 +89,14 @@ for I = ii+1 : num_msgs
     
     pause(0.01)
     clf
-    
+
+    %% calculate the angles between the lines
+    angs(:,I)=my_angles(W(:,:,I),nocche);
 end
-nocche=my_transform(mnocche,oTm(:,:,I));
 
 my_skeleton(W(:,:,I),nocche,Itrust)
 
 %% plot how many markers do we see
 my_wave(trustV);
-
-
 
 

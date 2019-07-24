@@ -21,7 +21,6 @@ x=x/norm(x);
 y=V(ind(1),:)-V(ind(3),:);
 y=y/norm(y);
 
-% uncomment if bag is in 23
 temp=x;
 x=-y;
 y=-temp;

@@ -26,7 +26,7 @@ load("desired_config.mat")
 % bag_name="../../bag_file/good/m_pollice.bag";
 % bag_name="../../bag_file/good/ref_p_far_mrkrs.bag";
 % bag_name="../../bag_file/good/ref_calib_other_side.bag";
-% bag_name="../../bag_file/good/reference_calibration_2.bag";
+%  bag_name="../../bag_file/good/reference_calibration_2.bag";
 % bag_name="../../bag_file/good/reference_calibration.bag";
 
 % 23
@@ -34,8 +34,8 @@ load("desired_config.mat")
 % bag_name="../../bag_file/23/fist.bag";
 % bag_name="../../bag_file/23/indice_miscell.bag";
 % bag_name="../../bag_file/23/onda.bag"; %cancella
-bag_name="../../bag_file/23/reference.bag";
-% bag_name="../../bag_file/23/sequ_dita.bag";
+% bag_name="../../bag_file/23/reference.bag";
+bag_name="../../bag_file/23/sequ_dita.bag";
 
 % broken
 % bag_name="../../bag_file/broken/move_objs.bag";

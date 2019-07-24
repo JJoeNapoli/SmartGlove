@@ -1,6 +1,6 @@
 function []=my_skeleton(mrkrs,nocche,Itrust)
 %% plot the mrkrs and knucles
-hold on,axis([-0.5 0.3 -0.5 -0.1 0 0.8]),grid on, view(-37.5,75),
+hold on,axis equal,grid on, view(3),
 % W = [mrkrs;nocche(:,:)];
 W = mrkrs;
 for i=1:size(W,1)
