@@ -1,0 +1,10 @@
+float64 gyroXangle
+float64 gyroYangle
+float64 compAngleX
+float64 compAngleY
+float64 kalAngleX
+float64 kalAngleY
+uint32 timer
+float64 roll
+float64 pitch
+float32 Id
