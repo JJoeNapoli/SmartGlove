@@ -1,13 +1,17 @@
+% % % % % % % SMART  GLOVE  FOR  HUMAN-ROBOT  INTERACTION % % % % % % %
+% Authors:
+% Giovanni Napoli
+% Francesco Giovinazzo
+
+%% MOTION CAPTURE MODULE
+
 % main_reference
 % main_knucles
-
-%% MOCAP OPTITRACK PLOTTING HAND
-%% tf rviz sucks
 clc
 clear
 close all
 
-%% load knucles
+%% load knucles and the desired configuration
 load("knucles.mat")
 load("desired_config.mat")
 
@@ -29,8 +33,8 @@ load("desired_config.mat")
 % bag_name="../../bag_file/23/clockwise.bag";
 % bag_name="../../bag_file/23/fist.bag";
 % bag_name="../../bag_file/23/indice_miscell.bag";
-bag_name="../../bag_file/23/onda.bag";
-% bag_name="../../bag_file/23/reference.bag";
+% bag_name="../../bag_file/23/onda.bag"; %cancella
+bag_name="../../bag_file/23/reference.bag";
 % bag_name="../../bag_file/23/sequ_dita.bag";
 
 % broken
