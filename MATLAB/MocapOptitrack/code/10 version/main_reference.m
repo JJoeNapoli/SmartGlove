@@ -28,7 +28,7 @@ mTo(:,:,I)=[   oRm^-1,       (-oRm^-1)*RB(I,1).field';
 %% set nocche (pollice,indice,...,polso)
 Vdes=zeros(12,3);
 
-% if bag is in 23
+% if bag is in 23 or 25
 
 Vdes(1,:)=V(1).field(1,:);
 Vdes(2,:)=V(1).field(8,:);

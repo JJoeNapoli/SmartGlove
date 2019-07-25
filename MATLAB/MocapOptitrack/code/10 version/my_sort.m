@@ -31,7 +31,7 @@ while count ~= size(diff,1)-1
             
             break
             
-        elseif max(abs(diff(i,:)))>0.015
+        elseif max(abs(diff(i,:)))>0.02
             % change mVold
             temp=mVold(i,:);
             mVold(i,:)=[];

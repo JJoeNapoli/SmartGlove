@@ -35,7 +35,13 @@ load("desired_config.mat")
 % bag_name="../../bag_file/23/indice_miscell.bag";
 % bag_name="../../bag_file/23/onda.bag"; %cancella
 % bag_name="../../bag_file/23/reference.bag";
-bag_name="../../bag_file/23/sequ_dita.bag";
+% bag_name="../../bag_file/23/sequ_dita.bag";
+
+%25
+bag_name="../../bag_file/25/2019-07-25-10-12-01.bag";
+
+
+
 
 % broken
 % bag_name="../../bag_file/broken/move_objs.bag";
