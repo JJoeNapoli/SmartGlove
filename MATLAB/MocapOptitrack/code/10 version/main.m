@@ -38,7 +38,11 @@ load("desired_config.mat")
 % bag_name="../../bag_file/23/sequ_dita.bag";
 
 %25
-bag_name="../../bag_file/25/2019-07-25-10-12-01.bag";
+% bag_name="../../bag_file/25/2019-07-25-10-12-01.bag";
+% bag_name="../../bag_file/25/2019-07-25-10-10-15.bag";
+% bag_name="../../bag_file/25/2019-07-25-10-08-25.bag";
+bag_name="../../bag_file/25/2019-07-25-10-07-08.bag";
+% bag_name="../../bag_file/25/2019-07-25-10-06-42.bag";
 
 
 

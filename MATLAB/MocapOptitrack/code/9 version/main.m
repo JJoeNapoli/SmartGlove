@@ -14,7 +14,7 @@ load("desired_config.mat")
 %% load bag file
 
 % bag_name="../../bag_file/m_6e8_p_far.bag";
-% bag_name="../../bag_file/ref_incl_up_down_br.bag";
+bag_name="../../bag_file/good/ref_incl_up_down_br.bag";
 % bag_name="../../bag_file/ref_incl.bag";
 % bag_name="../../bag_file/up_down.bag";
 % bag_name="../../bag_file/m_anul_mign.bag";
@@ -22,7 +22,7 @@ load("desired_config.mat")
 % bag_name="../../bag_file/ref_p_far_mrkrs.bag";
 % bag_name="../../bag_file/ref_calib_other_side.bag";
 % bag_name="../../bag_file/reference_calibration_2.bag";
-bag_name="../../bag_file/good/reference_calibration.bag";
+% bag_name="../../bag_file/good/reference_calibration.bag";
 
 % TODO %%%%
 % bag_name="../../bag_file/move_objs.bag";% CONTROLLA

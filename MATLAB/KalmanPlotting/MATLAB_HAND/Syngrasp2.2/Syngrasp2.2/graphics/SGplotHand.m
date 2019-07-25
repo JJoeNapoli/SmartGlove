@@ -58,7 +58,8 @@ for j=1:hand.n % for each finger
     % plot the finger base
     plot3(hand.F{j}.base(1,4),hand.F{j}.base(2,4),hand.F{j}.base(3,4),'r*');
     if(j == 1)         
-        hold on        
+        hold on, axis equal, view(-120,45)
+
     end
     
     % plot the joints and the end tip

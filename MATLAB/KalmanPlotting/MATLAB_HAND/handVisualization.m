@@ -1,7 +1,7 @@
 function  [] = handVisualization(qm,hand,S)
     
     clf
-    
+
     hand = SGdefineSynergies(hand,S(:,1:4),qm);    
     hand = SGmoveHand(hand,qm);
     grid on

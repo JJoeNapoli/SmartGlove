@@ -41,7 +41,7 @@ end
 
 % fill the true structs
 j=0;
-for i=1:max([length(msgs_mrks),length(msgs_rb)])
+for i=1:min([length(msgs_mrks),length(msgs_rb)])
     if i==81
     end
     if size(V_temp(i).field,1)~=0 && size(RB_temp(i).field,1)~=0

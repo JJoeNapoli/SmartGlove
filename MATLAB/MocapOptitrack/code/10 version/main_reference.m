@@ -4,8 +4,8 @@ clear
 close all
 
 %% load bag file
-% bag_name="../../bag_file/good/reference_calibration.bag";
-bag_name="../../bag_file/23/reference.bag";
+bag_name="../../bag_file/good/reference_calibration.bag";
+% bag_name="../../bag_file/23/reference.bag";
 [V_struct,RB_struct]=load_and_fill(bag_name);
 
 %% clean fromm bad data
